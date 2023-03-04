@@ -88,4 +88,4 @@ The essence is that work of team members (on the develop branch) can continue, w
 ----------
 
 ## <div align="center"><a name="license"></a>License</div>
-Even though the project is not planned to be used for commercial product, as it uses YOLOv5, this project is also under the GPL-3.0 License. See [LICENSE](https://github.com/sciencejiho/CIS_5700_Project/blob/master/LICENSE) file for details.
+Even though the project is not planned to be used for commercial product, this project is also under the GPL-3.0 License. See [LICENSE](https://github.com/sciencejiho/CIS_5700_Project/blob/master/LICENSE) file for details.
