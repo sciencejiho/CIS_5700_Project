@@ -1,72 +1,91 @@
-# ERNet
+# <div align="center">Analyzing “ERNet: Unsupervised Collective Extraction and Registration in Neuroimaging Data”</div>
 
-Anonymous repository for ERNet: An End-to-End Approach for Unsupervised Joint Extraction and Registration in Neuroimaging Data. This repository contains the implementation of ERNet.
+<div align="center">
+Final Project relevant to advanced data mining.
 
-### Unsupervised Joint Extraction and Registration Problem
-![ER_problem](./fig/er_problem.png)
+The original code can be found at https://github.com/ERNetERNet/ERNet.
+</div>
 
-### Network Architecture
-![ERNet_architecture](./fig/ernet_architecture.png)
+## <div align="center">Table of Contents</div>
+- [What's included](#tree)
+- [Documentation](#docs)
+- [Git workflow](#workflow)
+- [License](#license)
 
-## File listing
+## <div align="center"><a name="tree"></a> What's included</div>
 
-The corresponding files contain the source code and sample data of ERNet.
-
-+ __dataset__ : Sample dataset for code test
-+ __main.py__ : Main code for ERNet training
-+ __model.py__ : Supporting models
-+ __preprocess_data.py__ : Using for preprocess neuroimaging data
-+ __train.py__ : Supporting training
-+ __utils.py__ : Supporting functions
-
-Note that all public datasets used in the paper can be found here:
-+ __[LPBA40](https://resource.loni.usc.edu/resources/atlases-downloads/)__ 
-+ __[CC359](https://sites.google.com/view/calgary-campinas-dataset/home)__ 
-+ __[IBSR](https://www.nitrc.org/projects/ibsr)__ 
-
-Raw data can be preprocessed via preprocess_data.py.
-
-## Instructions on training ERNet
-
-The following script is for training:
-
+```text
+CIS_5700_project/
+├── docs/
+│   ├── DEVELOPER.md
+│   └── ECE 5831 Project Report.pdf
+├── src/
+│   ├── dataset/
+│   │   ├── LPBA40_fixed_96.npy
+│   │   ├── LPBA40_fixed_amlabel_96.npy
+│   │   ├── LPBA40_test_sample.npy
+│   │   ├── LPBA40_train_sample.npy
+│   │   └── LPBA40_val_sample.npy
+│   ├── main.py
+│   ├── model.py
+│   ├── preprocess_data.py
+│   ├── train.py
+│   ├── utils.py
+│   ├── train.py
+│   └── README.md
+└── README.md
 ```
-python main.py
+
+## <div align="center"><a name="docs"></a>Documentation</div>
+
+See the [docs](https://https://github.com/sciencejiho/CIS_5700_Project/docs) folder for full documentation.
+
+<!-- <details open>
+<summary>Install</summary>
+
+Clone repo and install [requirements.txt](https://github.com/ultralytics/yolov5/blob/master/requirements.txt) in a
+[**Python>=3.7.0**](https://www.python.org/) environment, including
+[**PyTorch>=1.7**](https://pytorch.org/get-started/locally/).
+
+```bash
+git clone https://github.com/ultralytics/yolov5  # clone
+cd yolov5
+pip install -r requirements.txt  # install
 ```
-<b>Parameters:</b>
 
-+ __main.py__ :
+</details> -->
 
-	+ __train_set_name__ : file name of training set, default "LPBA40_train_sample.npy"
-	+ __val_set_name__ : file name of validation set, default "LPBA40_val_sample.npy"
-	+ __test_set_name__ : file name of test set, default "LPBA40_test_sample.npy"
-	+ __dice_label__ :  dataset name of anatomical label, default "LPBA40"
-	+ __fixed_set_name__ :  dataset name of the target (fixed) image, default "LPBA40"
-	+ __reg_loss_name__ :  training similarity loss function , default "NCC"
-	+ __gamma__ :  threshold of sigmoid function , default 10
-	+ __lamda_mask__ :  value of mask smoothing regularization parameter, default 1.0
-	+ __mask_smooth_loss_func__ :  loss function of mask smoothing, default first_Grad("l2")
-	+ __ext_stage__ :  number of stages of extraction, default 5
-	+ __reg_stage__ :  number of stages of registration, default 5
-	+ __if_train_aug__ :  apply data augmentation during the training, default True
-	+ __batch_size__ : batch size, default 1
-	+ __img_size__ : size of input images, default 96
-	+ __num_epochs__ : number of epochs, default 1000
-	+ __learning_rate__ : learning rate, default 0.000001
-	+ __save_every_epoch__ : saving interval for results, default 1
-	+ __save_start_epoch__ : start point for results saving, default 0
-	+ __model_name__ : model, default ERNet(img_size, ext_stage , reg_stage, gamma)
+## <div align="center"><a name="workflow"></a> Git Workflow</div>
+The core idea behind the Feature Branch Workflow is that all feature development should take place in a dedicated branch instead of the master branch. This encapsulation makes it easy for multiple developers to work on a particular feature without disturbing the main codebase. It also means the master branch will never contain broken code, which is a huge advantage for continuous integration environments.
 
+#### release
+This branch contains the machine problems from the semester, as well as any other code examples staff members want to send to the students.
 
-## Result
-The results can be find after training.
-+ __loss_log__ :
-    + __model_name.txt__ : log file of the model
-+ __model__ :
-    + __model_name.pth__ : saved model
-+ __sample_img__ :
-    + __o__ : target images
-    + __t__ : source images
-	+ __s_stage__ : extracted images by stage
-	+ __s_stage_mask__ : mask of extracted images by stage
-    + __r_stage__ : warped (registered) images by stage
+### Main Branches
+* master
+* release
+
+#### master
+This branch is the branch where all the development takes place. When the source code in the develop branch reaches a stable point and is ready to be released, all of the changes should be merged back into master somehow and then tagged with a release number. How this is done in detail will be discussed further on.
+
+#### release
+This is the main branch where the source code of HEAD always reflects a production-ready state. I consider this branch to be the main branch where the source code of HEAD always reflects a state with the latest delivered development changes for the next release. Some would call this the “integration branch”.
+
+### Feature Branches
+* feature
+* hotfix
+
+#### feature
+Feature branches (or sometimes called topic branches) are used to develop new features for the upcoming or a distant future release. When starting development of a feature, the target release in which this feature will be incorporated may well be unknown at that point. The essence of a feature branch is that it exists as long as the feature is in development, but will eventually be merged back into develop (to definitely add the new feature to the upcoming release) or discarded (in case of a disappointing experiment).
+
+Feature branches typically exist in developer repos only, not in origin.
+
+#### hotfix
+Hotfix branches are very much like release branches in that they are also meant to prepare for a new production release, albeit unplanned. They arise from the necessity to act immediately upon an undesired state of a live production version. When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.
+
+The essence is that work of team members (on the develop branch) can continue, while another person is preparing a quick production fix.
+
+----------
+
+## <div align="center"><a name="license"></a>License</div>
+Even though the project is not planned to be used for commercial product, as it uses YOLOv5, this project is also under the GPL-3.0 License. See [LICENSE](https://github.com/sciencejiho/CIS_5700_Project/blob/master/LICENSE) file for details.
